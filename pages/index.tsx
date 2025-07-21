@@ -1,32 +1,45 @@
 import React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import Head from "next/head";
+import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Mail, MapPin, Linkedin, Github, Twitter, ExternalLink } from "lucide-react";
+import { useBackgroundSwap } from "../utils/useBackgroundSwap";
 
-import { Roadmap } from "../components/Roadmap";
-import styles from "./_index.module.css";
+const Roadmap = dynamic(
+  () => import("../components/Roadmap").then((mod) => mod.Roadmap),
+  { ssr: false, loading: () => null }
+);
+
+import styles from "./index.module.css";
 
 export default function HomePage() {
+  useBackgroundSwap();
+
   return (
     <>
-      <Helmet>
-        <title>EcoFolio | Interactive Sustainability Portfolio</title>
+      <Head>
+        <title>Living Portfolio - Sagar Siripuram</title>
         <meta
           name="description"
-          content="An interactive, gamified portfolio showcasing sustainability expertise and environmental impact. Navigate through my professional journey using our innovative roadmap interface."
+          content="Sagar Siripuram’s sustainability portfolio: LCA, EPDs, climate projects, and impact metrics. Explore my journey via interactive roadmap."
         />
-        <meta name="keywords" content="sustainability, LCA, portfolio, environmental impact, climate, green technology" />
-      </Helmet>
+        <link rel="canonical" href="https://your-domain.com/" />
+      </Head>
+
       <main className={styles.main}>
-        <section className={styles.hero}>
+        {/* Hero / About */}
+        <section
+          className={styles.hero}
+          id="about"
+          data-bg="/assets/hd/forest-canopy.jpg"
+        >
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
-              Welcome to My
-              <span className={styles.heroAccent}> Living Portfolio</span>
+              Hi, I’m Sagar Siripuram
+              <span className={styles.heroAccent}>Welcome to my portfolio</span>
             </h1>
             <p className={styles.heroSubtitle}>
-              Exploring sustainability through a journey of growth and impact. 
-              Navigate my professional story using the interactive roadmap below.
+              Happy to host you—but before we dive in, shall we take a quick tour?
             </p>
             <div className={styles.heroStats}>
               <div className={styles.statItem}>
@@ -45,23 +58,33 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className={styles.navigation}>
-          <h2 className={styles.sectionTitle}>Explore My Journey</h2>
+        {/* Journey / Roadmap */}
+        <section
+          className={styles.navigation}
+          id="journey"
+          data-bg="/assets/hd/solar-farm-aerial.jpg"
+        >
+          <h2 className={styles.sectionTitle}>Here we go…</h2>
           <p className={styles.sectionSubtitle}>
-            Click on any node to explore different aspects of my sustainability work
+            Alright! Click on any node to explore different aspects of my work.
           </p>
           <Roadmap />
         </section>
 
-        <section className={styles.contact} id="contact-section">
+        {/* Contact & Social */}
+        <section
+          className={styles.contact}
+          id="contact"
+          data-bg="/assets/hd/urban-evening-glow.jpg"
+        >
           <div className={styles.contactContent}>
+            {/* Left column: Contact Info */}
             <div className={styles.contactInfo}>
               <h2 className={styles.sectionTitle}>Let's Connect</h2>
               <p className={styles.contactDescription}>
-                Passionate about creating sustainable solutions and driving environmental impact. 
+                Passionate about creating sustainable solutions and driving environmental impact.  
                 Let's collaborate on making a difference.
               </p>
-              
               <div className={styles.contactDetails}>
                 <div className={styles.contactItem}>
                   <Mail className={styles.contactIcon} />
@@ -71,18 +94,20 @@ export default function HomePage() {
                 </div>
                 <div className={styles.contactItem}>
                   <MapPin className={styles.contactIcon} />
-                  <span className={styles.contactText}>San Francisco, CA</span>
+                  <span className={styles.contactText}>
+                    Ankleshwar, Gujarat, India
+                  </span>
                 </div>
               </div>
             </div>
 
+            {/* Right column: Social + Summary */}
             <div className={styles.socialMedia}>
               <h3 className={styles.socialTitle}>Follow My Work</h3>
               <div className={styles.socialLinks}>
                 <a
-                  href="https://linkedin.com/in/sustainability-expert"
+                  href="https://linkedin.com/in/your-profile"
                   className={styles.socialLink}
-                  aria-label="LinkedIn Profile"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -91,9 +116,8 @@ export default function HomePage() {
                   <ExternalLink className={styles.externalIcon} />
                 </a>
                 <a
-                  href="https://github.com/sustainability-expert"
+                  href="https://github.com/your-username"
                   className={styles.socialLink}
-                  aria-label="GitHub Profile"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -102,9 +126,8 @@ export default function HomePage() {
                   <ExternalLink className={styles.externalIcon} />
                 </a>
                 <a
-                  href="https://twitter.com/sustainability_expert"
+                  href="https://twitter.com/your-handle"
                   className={styles.socialLink}
-                  aria-label="Twitter Profile"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -113,14 +136,14 @@ export default function HomePage() {
                   <ExternalLink className={styles.externalIcon} />
                 </a>
               </div>
-              
+
               <div className={styles.professionalSummary}>
                 <p>
                   <strong>Sustainability Consultant & LCA Expert</strong>
                 </p>
                 <p>
-                  Specialized in Life Cycle Assessment, Environmental Product Declarations, 
-                  and sustainable material selection. ACLCA LCACP certified with 10+ years 
+                  Specialized in Life Cycle Assessment, Environmental Product Declarations,  
+                  and sustainable material selection. ACLCA LCACP certified with 10+ years  
                   of experience helping organizations reduce their environmental footprint.
                 </p>
               </div>
@@ -128,6 +151,11 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className={styles.footer}>
+        <p>© {new Date().getFullYear()} Sagar Siripuram. All rights reserved.</p>
+      </footer>
     </>
   );
 }

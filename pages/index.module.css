@@ -1,3 +1,5 @@
+/* ────────────────────────────────────────────────────────────────────────── */
+/* Layout & Stacking */
 .main {
   position: relative;
   display: flex;
@@ -8,30 +10,42 @@
   z-index: var(--z-content);
 }
 
+/* ─ Hero Overlay & Content ───────────────────────────────────────────────── */
 .hero {
-  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: var(--spacing-12) var(--spacing-6);
-  background: linear-gradient(135deg, 
-    color-mix(in srgb, var(--background) 95%, var(--primary) 5%),
-    color-mix(in srgb, var(--background) 90%, var(--secondary) 10%)
-  );
+}
+
+/* Darken the background image for better contrast */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
 }
 
 .heroContent {
+  position: relative;      /* above the overlay */
+  z-index: 1;
   text-align: center;
-  max-width: 900px;
-  width: 100%;
+  color: #fff;
+  padding: 2rem;
 }
 
+/* ─ Hero Typography & Stats ─────────────────────────────────────────────── */
 .heroTitle {
   font-family: var(--font-family-heading);
-  font-size: 4rem;
+  /* fluid font size between 2.5rem and 4rem */
+  font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
   font-weight: 700;
-  color: var(--foreground);
   margin-bottom: var(--spacing-6);
   line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .heroAccent {
@@ -46,8 +60,7 @@
   margin-bottom: var(--spacing-8);
   line-height: 1.6;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto var(--spacing-8);
 }
 
 .heroStats {
@@ -77,6 +90,7 @@
   margin-top: var(--spacing-1);
 }
 
+/* ─ Navigation Section ──────────────────────────────────────────────────── */
 .navigation {
   width: 100%;
   max-width: 1200px;
@@ -95,14 +109,14 @@
 .sectionSubtitle {
   font-size: 1.125rem;
   color: var(--muted-foreground);
-  margin-bottom: var(--spacing-8);
+  margin: 0 auto var(--spacing-8);
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
+/* ─ Contact Section ─────────────────────────────────────────────────────── */
 .contact {
   width: 100%;
+  background-color: var(--surface);
   background-color: color-mix(in srgb, var(--surface) 95%, var(--primary) 5%);
   border-top: 1px solid var(--border);
   padding: var(--spacing-16) var(--spacing-6);
@@ -156,7 +170,6 @@
 }
 
 .contactLink:hover {
-  color: var(--primary);
   text-decoration: underline;
 }
 
@@ -165,6 +178,7 @@
   font-weight: 500;
 }
 
+/* ─ Social & Summary ────────────────────────────────────────────────────── */
 .socialMedia {
   display: flex;
   flex-direction: column;
@@ -192,8 +206,8 @@
   background-color: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  text-decoration: none;
   color: var(--card-foreground);
+  text-decoration: none;
   transition: all var(--animation-duration-normal) ease;
   box-shadow: var(--shadow);
 }
@@ -239,50 +253,49 @@
   color: var(--primary);
 }
 
-/* Mobile Responsiveness */
+/* ─ Footer ──────────────────────────────────────────────────────────────── */
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: var(--spacing-6) 0;
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  margin-top: auto;
+}
+
+/* ─ Mobile Responsiveness ──────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .hero {
     padding: var(--spacing-8) var(--spacing-4);
   }
-
   .heroTitle {
     font-size: 2.5rem;
   }
-
   .heroAccent {
     display: inline;
   }
-
   .heroSubtitle {
     font-size: 1.125rem;
   }
-
   .heroStats {
     flex-direction: column;
     gap: var(--spacing-4);
   }
-
-  .statNumber {
-    font-size: 2rem;
-  }
-
   .navigation {
     padding: var(--spacing-12) var(--spacing-4);
   }
-
   .sectionTitle {
     font-size: 2rem;
   }
-
   .contact {
     padding: var(--spacing-12) var(--spacing-4);
   }
-
   .contactContent {
     grid-template-columns: 1fr;
     gap: var(--spacing-8);
   }
-
   .socialLinks {
     gap: var(--spacing-2);
   }
@@ -292,15 +305,12 @@
   .heroStats {
     gap: var(--spacing-3);
   }
-
   .statItem {
     padding: var(--spacing-2);
   }
-
   .statNumber {
     font-size: 1.75rem;
   }
-
   .statLabel {
     font-size: 0.75rem;
   }

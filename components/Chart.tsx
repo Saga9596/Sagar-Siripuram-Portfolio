@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
-import type { TooltipProps } from "recharts"
 import styles from "./Chart.module.css"
 
 export type ChartConfig = {
@@ -68,9 +67,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
         __html: `
 [data-chart=${id}] {
 ${colorConfig
-  .map(([key, itemConfig]) =>
-    itemConfig.color ? `  --color-${key}: ${itemConfig.color};` : null
-  )
+  .map(([key, itemConfig]) => itemConfig.color ? `  --color-${key}: ${itemConfig.color};` : null)
   .join("\n")}
 }
 `      }}
@@ -82,13 +79,14 @@ const ChartTooltip = RechartsPrimitive.Tooltip
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  TooltipProps<any, any> & React.ComponentProps<"div"> & {
-    hideLabel?: boolean
-    hideIndicator?: boolean
-    indicator?: "line" | "dot" | "dashed"
-    nameKey?: string
-    labelKey?: string
-  }
+  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+    React.ComponentProps<"div"> & {
+      hideLabel?: boolean
+      hideIndicator?: boolean
+      indicator?: "line" | "dot" | "dashed"
+      nameKey?: string
+      labelKey?: string
+    }
 >((props, ref) => {
   const {
     active,
@@ -106,16 +104,15 @@ const ChartTooltipContent = React.forwardRef<
     labelKey,
   } = props
 
-  const items = payload || []
+  // default payload to empty list if undefined
+  const items = payload ?? []
   const { config } = useChart()
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !items.length) return null
     const item = items[0]
     const key = `${labelKey || item?.dataKey || item?.name || "value"}`
-    const itemConfig = item
-      ? getPayloadConfigFromPayload(config, item, key)
-      : null
+    const itemConfig = item ? getPayloadConfigFromPayload(config, item, key) : null
     const value =
       !labelKey && typeof label === "string"
         ? config[label as keyof typeof config]?.label || label
@@ -128,20 +125,8 @@ const ChartTooltipContent = React.forwardRef<
       )
     }
     if (!value) return null
-    return (
-      <div className={`${styles.tooltipLabel} ${labelClassName ?? ""}`}>
-        {value}
-      </div>
-    )
-  }, [
-    label,
-    labelFormatter,
-    items,
-    hideLabel,
-    labelClassName,
-    config,
-    labelKey,
-  ])
+    return <div className={`${styles.tooltipLabel} ${labelClassName ?? ""}`}>{value}</div>
+  }, [label, labelFormatter, items, hideLabel, labelClassName, config, labelKey])
 
   if (!active || !items.length) return null
   const nestLabel = items.length === 1 && indicator !== "dot"
@@ -153,21 +138,11 @@ const ChartTooltipContent = React.forwardRef<
         {items.map((item, index) => {
           const key = `${nameKey || item.name || item.dataKey || "value"}`
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
-          const indicatorColor =
-            color || (item.payload as any)?.fill || item.color
+          const indicatorColor = color || (item.payload as any)?.fill || item.color
           return (
-            <div
-              key={item.dataKey}
-              className={`${styles.tooltipItem} ${className ?? ""}`}
-            >
+            <div key={item.dataKey} className={`${styles.tooltipItem} ${className ?? ""}`}>
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(
-                  item.value,
-                  item.name,
-                  item,
-                  index,
-                  (item.payload as any)
-                )
+                formatter(item.value, item.name, item, index, (item.payload as any))
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -218,18 +193,13 @@ const ChartLegendContent = React.forwardRef<
   const { config } = useChart()
   if (!payload?.length) return null
   return (
-    <div
-      ref={ref}
-      className={`${styles.legend} ${styles[`legend-${verticalAlign}`]} ${className ?? ""}`}
-    >
+    <div ref={ref} className={`${styles.legend} ${styles[`legend-${verticalAlign}`]} ${className ?? ""}`}>
       {payload.map((item) => {
         const key = `${nameKey || item.dataKey || "value"}`
         const itemConfig = getPayloadConfigFromPayload(config, item, key)
         return (
           <div key={item.value} className={`${styles.legendItem} ${className ?? ""}`}> 
-            {itemConfig?.icon && !hideIcon ? (
-              <itemConfig.icon />
-            ) : (
+            {itemConfig?.icon && !hideIcon ? <itemConfig.icon /> : (
               <div className={styles.legendItemIcon} style={{ backgroundColor: item.color }} />
             )}
             {itemConfig?.label}

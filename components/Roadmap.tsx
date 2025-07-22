@@ -23,8 +23,6 @@ interface RoadmapState {
   isSectionExperienceOpen: boolean;
 }
 
-
-
 const RoadmapNode = ({
   node,
   index,
@@ -106,7 +104,6 @@ const RoadmapNode = ({
           <div className={styles.nodeLabel} aria-hidden="true">
             {node.title}
           </div>
-          {/* Branch connector for non-sub nodes */}
           {!isSubNode && <div className={styles.branchConnector}></div>}
         </div>
       </TooltipTrigger>
@@ -135,22 +132,20 @@ export const Roadmap = () => {
   const handleNodeClick = (nodeId: number) => {
     const node = roadmapData.find(n => n.id === nodeId) || 
                  roadmapData.find(n => n.subNodes?.some(sub => sub.id === nodeId))?.subNodes?.find(sub => sub.id === nodeId);
-    
+
     if (!node) return;
 
     if (node.subNodes && node.subNodes.length > 0) {
-      // Toggle expansion for parent nodes with children AND show SectionExperience
       setRoadmapState(prev => ({
         ...prev,
         expandedNodeIds: prev.expandedNodeIds.has(nodeId)
           ? new Set([...prev.expandedNodeIds].filter(id => id !== nodeId))
           : new Set([...prev.expandedNodeIds, nodeId]),
         activeNodeId: nodeId,
-        selectedNodeId: nodeId, // Always set selectedNodeId to show SectionExperience
+        selectedNodeId: nodeId,
         isSectionExperienceOpen: true,
       }));
     } else {
-      // Show SectionExperience for all nodes (including leaf nodes and main sections)
       setRoadmapState(prev => ({
         ...prev,
         selectedNodeId: nodeId,
@@ -165,21 +160,19 @@ export const Roadmap = () => {
       ...prev,
       selectedNodeId: null,
       activeNodeId: null,
-      expandedNodeIds: new Set(), // Clear all expanded nodes for clean state transitions
+      expandedNodeIds: new Set(),
       isSectionExperienceOpen: false,
     }));
   };
 
   const handleNavigate = (content: RoadmapContent) => {
     console.log('Navigating to content:', content.title);
-    // Navigation is handled internally by SectionExperience
   };
 
   const getNodeContent = (nodeId: number): RoadmapContent | undefined => {
     const mainContent = roadmapContent.find(c => c.id === nodeId);
     if (mainContent) return mainContent;
-    
-    // Check sub-content
+
     for (const content of roadmapContent) {
       if (content.subContent) {
         const subContent = content.subContent.find(sub => sub.id === nodeId);
@@ -190,8 +183,8 @@ export const Roadmap = () => {
   };
 
   const renderPath = () => {
-    const pathHeight = roadmapData.length * 300; // Approximate height based on nodes
-    
+    const pathHeight = roadmapData.length * 300;
+
     return (
       <svg 
         className={styles.pathSvgVertical} 
@@ -205,7 +198,6 @@ export const Roadmap = () => {
           fill="none"
           className={styles.pathTrail}
         />
-        {/* Growth rings/nodes along the path */}
         {roadmapData.map((_, index) => (
           <circle
             key={index}
@@ -260,12 +252,13 @@ export const Roadmap = () => {
           ))}
         </div>
       </nav>
-      
+
       <SectionExperience 
         isOpen={roadmapState.isSectionExperienceOpen}
         onClose={handleCloseSectionExperience}
         content={selectedContent}
         onNavigate={handleNavigate}
+        profileImageUrl={selectedContent?.id === 1 ? "/images/sagar.png" : undefined}
       />
     </div>
   );

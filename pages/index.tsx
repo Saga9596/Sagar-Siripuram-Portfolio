@@ -18,7 +18,7 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Living Portfolio - Sagar Siripuram</title>
+        <title>Sagar Siripuram</title>
         <meta
           name="description"
           content="Sagar Siripuram’s sustainability portfolio: LCA, EPDs, climate projects, and impact metrics. Explore my journey via interactive roadmap."
@@ -31,7 +31,7 @@ export default function HomePage() {
         <section
           className={styles.hero}
           id="about"
-          data-bg="/assets/hd/forest-canopy.jpg"
+          data-bg="/assets/hd/default.jpg"
         >
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>

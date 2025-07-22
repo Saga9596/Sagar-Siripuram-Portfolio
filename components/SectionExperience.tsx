@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { X, ArrowRight, Leaf, Zap, Target, Heart, ChevronRight } from 'lucide-react';
 import { RoadmapContent } from '../helpers/roadmapContent';
 import styles from './SectionExperience.module.css';
+import Image from "next/image";
 
 // --- Reusable Animated Components ---
 
@@ -46,9 +47,20 @@ const AnimatedCounter = ({
 
 // --- Content Block Components ---
 
-const HeroSection = ({ title, description }: { title: string; description: string }) => (
+const HeroSection = ({ title, description, showProfileImage }: { title: string; description: string; showProfileImage?: boolean }) => (
   <section className={`${styles.contentBlock} ${styles.heroSection}`}>
     <div className={styles.heroText}>
+      {showProfileImage && (
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <Image
+            src="/images/sagar.png"
+            alt="Sagar Siripuram"
+            width={150}
+            height={150}
+            className={styles.profileImage}
+          />
+        </div>
+      )}
       <h1 className={styles.heroTitle}>{title}</h1>
       <p className={styles.heroSubtitle}>{description}</p>
     </div>
@@ -153,7 +165,6 @@ export const SectionExperience = ({ isOpen, onClose, content, onNavigate }: Sect
     if (isOpen && content) {
       setHistory([content]);
     } else if (!isOpen) {
-      // Delay clearing history to allow for exit animation
       const timer = setTimeout(() => setHistory([]), 500);
       return () => clearTimeout(timer);
     }
@@ -199,7 +210,11 @@ export const SectionExperience = ({ isOpen, onClose, content, onNavigate }: Sect
 
     return (
       <>
-        <HeroSection title={currentContent.title} description={currentContent.description} />
+        <HeroSection
+          title={currentContent.title}
+          description={currentContent.description}
+          showProfileImage={currentContent.id === 1}
+        />
         {currentContent.metrics && currentContent.metrics.length > 0 && (
           <MetricsSection metrics={currentContent.metrics} />
         )}

@@ -1,3 +1,4 @@
+/* Section Experience Styles */
 .sectionExperience {
   position: fixed;
   top: 0;
@@ -29,6 +30,21 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+}
+
+.profileImageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-6);
+}
+
+.profileImage {
+  width: 140px;
+  height: 140px;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
 .floatingParticle {

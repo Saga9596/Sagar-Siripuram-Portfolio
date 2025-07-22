@@ -6,210 +6,153 @@ export interface RoadmapContent {
   metrics?: { label: string; value: string }[];
   details?: string[];
   subContent?: RoadmapContent[];
+ imageUrl?: string;
 }
 
 export const roadmapContent: RoadmapContent[] = [
   {
     id: 1,
     title: "About",
-    description: "Environmental engineer and sustainability advocate with 8+ years of experience in green technology solutions and carbon footprint reduction. Passionate about creating scalable solutions that bridge the gap between environmental responsibility and business success.",
+	 imageUrl: "public/images/sagar.png", // ✅ Your image here
+    description: `I’m **Sagar Siripuram**, a Sustainability Analyst and the builder of Greensnaps. Over the past year I’ve helped manufacturers, architects, and brands translate complex environmental data into clear, actionable strategies—everything from cradle-to-grave carbon footprints to Environmental Product Declarations (EPDs) for new flooring variants. Before diving into sustainability, I spent two years in core civil construction, so I speak fluent concrete, steel, and embodied carbon.
+
+At **WAP Sustainability**, I lead LCA projects, GHG inventories, Declare Label and PEP Ecopassport certifications, and healthy-materials database management—melding rigorous ISO 14040/44 methodology with a practical, solution-driven mindset. Whether I’m running mass-balance calculations in GaBi, updating PCR-compliant EPDs, or automating carbon-accounting workflows, my goal is simple: empower teams to make smarter choices for people, planet, and profit.
+
+When I’m not refining spreadsheets or scripts, you’ll find me planting trees, hiking forest canopies, or scouting solar-farm installations. I’m an avid traveler and a regional-level soccer player. Rooted in tradition but always looking ahead, I blend data-driven analysis with a creative spark—and a dash of humor—to help build a more resilient world, one CO₂ calculation at a time.`,
     keyAchievements: [
-      "Led 15+ sustainability projects reducing organizational carbon footprint by 40%",
-      "Published research on renewable energy systems in peer-reviewed journals",
-      "Certified Energy Manager (CEM) and LEED AP with Building Design + Construction specialty",
-      "Keynote speaker at 12+ international sustainability conferences",
-      "Mentored 25+ junior engineers in sustainable design practices"
+      "Built Greensnaps",
+      "Led LCA & EPD updates for Revwood & Pergo flooring variants",
+      "Mentor for Mercedes-Benz beVisioneers Fellowship",
+      "Selected for UPG Sustainability Leadership Movement representing South Asia"
     ],
     metrics: [
-      { label: "Years Experience", value: "8+" },
-      { label: "Projects Led", value: "15+" },
-      { label: "CO₂ Reduction", value: "5,000 tons" },
-      { label: "Certifications", value: "8" }
+      { label: "Overall Experience", value: "5 years" },
+      { label: "LCA & GHG Experience", value: "1 year" },
+      { label: "Major Projects", value: "1" }
     ],
     details: [
-      "Specialized in renewable energy integration, waste reduction systems, and circular economy design",
-      "Expert in environmental impact assessment, life cycle analysis, and sustainability metrics",
-      "Passionate about creating scalable solutions for climate change through innovative technology",
-      "Strong background in project management, team leadership, and stakeholder engagement",
-      "Committed to advancing sustainable practices in both corporate and community environments"
+      "Conducted cradle-to-gate and cradle-to-grave Life Cycle Assessments per ISO 14040/44",
+      "Developed Scope 1–3 GHG inventories and basic carbon accounting",
+      "Familiar with GaBi modeling and Python-based sustainability automation",
+      "Managed EPD updates for flooring product variants",
+      "Mentored sustainability fellows in beVisioneers program"
     ]
   },
   {
     id: 2,
     title: "Portfolio",
-    description: "A comprehensive showcase of environmental projects, professional experience, and impact-driven initiatives that demonstrate expertise in sustainable technology and green solutions. Each project represents a commitment to measurable environmental impact.",
+    description: `A curated showcase of sustainability engagements—ranging from flooring product EPDs to corporate GHG inventories and green-tech pilots. Each entry demonstrates technical rigor, collaboration with diverse stakeholders, and quantifiable environmental benefits.`,
     keyAchievements: [
-      "500+ tons CO₂ equivalent saved annually across all projects",
-      "10+ award-winning projects recognized by industry organizations",
-      "50+ client organizations served across multiple industries",
-      "95% client satisfaction rate with long-term partnerships",
-      "Featured in 15+ case studies and industry publications"
+      "Reduced client carbon footprints by 40% through targeted LCA & optimization",
+      "Developed 5+ Declare & PEP Ecopassport certified product lines",
+      "Automated carbon-accounting workflows, cutting processing time by 50%",
+      "Completed 15+ GHG inventories across building and industrial sectors",
+      "Piloted rooftop farming and waste-diversion programs in Gujarat"
     ],
     metrics: [
-      { label: "Total CO₂ Saved", value: "500+ tons/year" },
-      { label: "Projects Completed", value: "50+" },
-      { label: "Client Satisfaction", value: "98%" },
-      { label: "Industries Served", value: "12" }
+      { label: "Total CO₂ Saved", value: "6,000+ tons/year" },
+      { label: "Projects Completed", value: "20+" },
+      { label: "Clients Served", value: "8+" },
+      { label: "Satisfaction Rate", value: "95%" }
     ],
     details: [
-      "Comprehensive project portfolio spanning renewable energy, waste management, and green building design",
-      "Proven track record of delivering projects on time and under budget while exceeding environmental targets",
-      "Experience working with Fortune 500 companies, startups, and government agencies",
-      "Expertise in stakeholder management and cross-functional team leadership"
-    ],
-    subContent: [
-      {
-        id: 201,
-        title: "Work Experience",
-        description: "Professional journey spanning environmental consulting, project management, and technical leadership roles. Eight years of progressive responsibility in sustainability and green technology implementation.",
-        keyAchievements: [
-          "Senior Environmental Engineer at GreenTech Solutions (2020-Present)",
-          "Sustainability Consultant for Fortune 500 companies (2019-2020)",
-          "Project Manager for renewable energy installations (2018-2019)",
-          "Environmental Analyst at EcoConsulting Group (2016-2018)",
-          "Research Associate at University Climate Lab (2015-2016)"
-        ],
-        metrics: [
-          { label: "Years Experience", value: "8+" },
-          { label: "Companies Served", value: "25+" },
-          { label: "Team Size Led", value: "15" },
-          { label: "Budget Managed", value: "$2.5M" }
-        ],
-        details: [
-          "Led cross-functional teams of engineers, analysts, and project coordinators",
-          "Managed project budgets ranging from $50K to $2.5M with consistent delivery success",
-          "Developed and implemented sustainability strategies for diverse industry sectors",
-          "Built strong relationships with clients, regulatory bodies, and technology partners"
-        ]
-      },
-      {
-        id: 202,
-        title: "Projects",
-        description: "Innovative environmental solutions and green technology implementations that demonstrate technical expertise and measurable impact. Each project showcases different aspects of sustainable engineering.",
-        keyAchievements: [
-          "Smart Grid Integration for 10MW Solar Farm - 25% efficiency improvement",
-          "Corporate Carbon Footprint Reduction Program - 40% reduction achieved",
-          "Waste-to-Energy System Design - 1,200 tons waste diverted annually",
-          "Green Building Retrofit Program - LEED Platinum certification achieved",
-          "Supply Chain Sustainability Assessment - 15% carbon footprint reduction"
-        ],
-        metrics: [
-          { label: "Active Projects", value: "12" },
-          { label: "Energy Generated", value: "25 GWh" },
-          { label: "Waste Diverted", value: "1,200 tons" },
-          { label: "Avg. ROI", value: "280%" }
-        ],
-        details: [
-          "Solar and wind energy installations with smart grid integration capabilities",
-          "Comprehensive waste management systems incorporating circular economy principles",
-          "Green building retrofits focusing on energy efficiency and occupant wellness",
-          "Industrial process optimization for reduced environmental impact and cost savings"
-        ]
-      },
-      {
-        id: 203,
-        title: "Case Studies",
-        description: "Detailed analysis of successful environmental interventions and their measurable impact. These case studies demonstrate methodology, challenges overcome, and lessons learned.",
-        keyAchievements: [
-          "Manufacturing Facility Energy Optimization - 40% energy reduction, $800K annual savings",
-          "Office Complex Zero-Waste Certification - 95% waste diversion rate achieved",
-          "Carbon-Neutral Supply Chain Implementation - Complete scope 1, 2, 3 carbon neutrality",
-          "Smart City Sustainability Plan - 30% citywide emission reduction roadmap",
-          "Industrial Water Treatment Innovation - 90% water recycling rate achieved"
-        ],
-        metrics: [
-          { label: "Studies Completed", value: "8" },
-          { label: "Avg. Impact", value: "35% improvement" },
-          { label: "ROI Average", value: "280%" },
-          { label: "Implementation Time", value: "6 months" }
-        ],
-        details: [
-          "Comprehensive pre and post-implementation analysis with detailed ROI calculations",
-          "Stakeholder engagement strategies and change management approaches documented",
-          "Technical methodologies and best practices for replication across similar projects",
-          "Long-term monitoring and performance tracking systems established for sustained impact"
-        ]
-      }
+      "Cradle-to-gate & cradle-to-grave analyses for building products",
+      "EPD development and PCR compliance for multiple flooring brands",
+      "Scope 1–3 GHG inventories and reporting per GHG Protocol",
+      "Materials health database & Declare Label management",
+      "Python & GaBi API integration for sustainability reporting automation"
     ]
   },
   {
     id: 3,
     title: "Skills",
-    description: "Technical expertise and core competencies in environmental engineering, renewable energy systems, and sustainability management. Continuously developing skills to stay at the forefront of green technology innovation.",
+    description: `Technical proficiencies and core competencies driving my sustainability practice. I continuously upskill to remain at the forefront of environmental engineering and green technology innovation.`,
     keyAchievements: [
-      "Certified Energy Manager (CEM) - Association of Energy Engineers",
-      "LEED AP with Building Design + Construction Specialty",
-      "PMP Certified Project Manager - Project Management Institute",
-      "ISO 14001 Environmental Management Systems Lead Auditor",
-      "Professional Engineer (PE) License in Environmental Engineering"
+      "ISO 14040/44 LCA Practitioner",
+      "GHG Protocol Scopes 1–3 Trained",
+      "Presented at LCA Summit on digital transformation and AI-driven data collection",
+      "Automated LCA & GHG workflows using Python and Excel scripting",
+      "Developed mass-balance and sensitivity analysis for product systems"
     ],
     metrics: [
-      { label: "Technical Skills", value: "25+" },
-      { label: "Certifications", value: "8" },
-      { label: "Proficiency Rating", value: "95%" },
-      { label: "Training Hours", value: "200+/year" }
+      { label: "Technical Skills", value: "15+" },
+      { label: "Certifications", value: "34" },
+      { label: "Proficiency Rating", value: "90%" },
+      { label: "Training Hours", value: "100+/year" }
     ],
     details: [
-      "Environmental Impact Assessment & Life Cycle Analysis - Expert level proficiency",
-      "Renewable Energy Systems Design & Integration - Solar, wind, and hybrid systems",
-      "Carbon Footprint Measurement & Reduction Strategies - Scope 1, 2, and 3 emissions",
-      "Green Building Design & LEED Certification - All rating systems and credit categories",
-      "Waste Management & Circular Economy Solutions - Zero waste and resource recovery",
-      "Energy Modeling & Building Performance Analysis - EnergyPlus, eQUEST, and TRNSYS",
-      "Environmental Regulatory Compliance - Federal, state, and local requirements",
-      "Project Management & Team Leadership - Agile and traditional methodologies"
+      "LCA Modeling",
+      "Scenario Analysis",
+      "BOM Mapping",
+      "GHG Calculations",
+      "Scope 1, 2, 3 Emissions Calculation",
+      "Materiality Assessments",
+      "Material Health Evaluations",
+      "Life Cycle Inventory Data Collection",
+      "Sensitivity & Uncertainty Analysis",
+      "Sustainability Reporting & ISO 14001 Compliance",
+      "Stakeholder Engagement & Team Coordination"
+    ]
+  },
+  {
+    id: 3.1,
+    title: "Licenses & Credentials",
+    description: `Professional accreditations validating expertise and industry standards compliance.`,
+    details: [
+      "IGBC Accredited Professional (AP)",
+      "WELL Accredited Professional (AP)",
+      "ActiveScore Accredited Professional (AP)",
+      "ModeScore Accredited Professional (AP)"
     ]
   },
   {
     id: 4,
     title: "Blog",
-    description: "Insights, research findings, and thought leadership on environmental sustainability, clean technology, and climate action. Sharing knowledge to accelerate the adoption of sustainable practices across industries.",
+    description: `Insights, how-tos, and thought leadership on LCA, GHG accounting, sustainable materials, and green building design. Sharing practical tips and case studies to accelerate sustainability adoption.`,
     keyAchievements: [
-      "50+ published articles on sustainability topics with 10,000+ monthly readers",
-      "Featured contributor to GreenBiz, Environmental Leader, and Sustainable Brands",
-      "Weekly newsletter with 2,500+ subscribers and 45% open rate",
-      "Guest expert on 15+ podcasts and webinars reaching 50,000+ listeners",
-      "Social media following of 8,000+ engaged sustainability professionals"
+      "15+ articles on LCA and sustainability published on LinkedIn & company blog",
+      "Guest expert on 3 industry webinars and podcasts",
+      "Weekly GreenWhisperer newsletter with 500+ subscribers",
+      "Contributor to WAP Sustainability white papers",
+      "Co-authored internal sustainability insights reports"
     ],
     metrics: [
-      { label: "Articles Published", value: "50+" },
-      { label: "Monthly Readers", value: "10K+" },
-      { label: "Social Shares", value: "5K+" },
-      { label: "Newsletter Subscribers", value: "2.5K" }
+      { label: "Articles Published", value: "15+" },
+      { label: "Monthly Readers", value: "3,000+" },
+      { label: "Social Shares", value: "1,000+" },
+      { label: "Newsletter Subscribers", value: "500+" }
     ],
     details: [
-      "Weekly insights on renewable energy trends, policy developments, and technology innovations",
-      "In-depth case study analyses and project retrospectives with actionable takeaways",
-      "Industry analysis and policy recommendations for accelerating sustainability adoption",
-      "Technical tutorials and best practice guides for environmental professionals",
-      "Guest interviews with industry leaders and innovative companies",
-      "Data-driven analysis of sustainability metrics and reporting frameworks"
+      "Deep dives on ISO 14040/44 and PCR best practices",
+      "Case studies of Mohawk flooring LCA & EPD projects",
+      "Tutorials on GaBi modeling and carbon-accounting scripts",
+      "Analysis of emerging sustainable materials",
+      "Commentary on India’s sustainability policy landscape"
     ]
   },
-  {
+    {
     id: 5,
     title: "Contact",
-    description: "Ready to collaborate on your next sustainability project or discuss how environmental engineering can drive your organization's climate goals. Let's work together to create measurable environmental impact and business value.",
+    description: `Let’s collaborate on your next sustainability challenge—whether it’s an LCA, GHG inventory, EPD update, or green-tech pilot. I deliver measurable environmental impact aligned with business value.`,
     keyAchievements: [
-      "Available for consulting projects, strategic advisory, and technical implementation",
-      "Speaking engagements and workshops on sustainability topics for conferences and corporate events",
-      "Collaborative research opportunities with universities and think tanks",
-      "Board advisory positions for sustainability-focused organizations",
-      "Mentoring and professional development for emerging environmental professionals"
+      "Available for consulting, strategic advisory & technical implementation",
+      "Speaking engagements & workshops on LCA, GHG accounting, and EPD development",
+      "Mentor for beVisioneers: The Mercedes-Benz Fellowship",
+      "Open to research & academic collaborations",
+      "Dedicated coaching for emerging sustainability professionals"
     ],
     metrics: [
       { label: "Response Time", value: "< 24 hrs" },
-      { label: "Project Success Rate", value: "98%" },
-      { label: "Client Retention", value: "85%" },
-      { label: "Referral Rate", value: "60%" }
+      { label: "Success Rate", value: "95%" },
+      { label: "Client Retention", value: "80%" },
+      { label: "Referral Rate", value: "50%" }
     ],
     details: [
-      "Professional consulting services for sustainability strategy, environmental compliance, and green technology implementation",
-      "Technical workshops and training programs for teams and organizations transitioning to sustainable practices",
-      "Research collaboration and advisory services for academic institutions and policy organizations",
-      "Speaking opportunities for conferences, corporate events, and educational institutions",
-      "Board positions and strategic advisory roles for sustainability-focused startups and nonprofits",
-      "Professional networking through LinkedIn, industry associations, and sustainability communities"
+      "Consulting services: LCA, EPD, GHG & carbon accounting",
+      "Technical workshops: GaBi, Python, sustainability reporting",
+      "Speaking: conferences, corporate events & webinars",
+      "Research collaboration: universities & think tanks",
+      "Networking: LinkedIn, industry forums & meetups"
     ]
   }
 ];

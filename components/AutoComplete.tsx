@@ -1,4 +1,5 @@
 import { CommandGroup, CommandItem, CommandList } from "./Command";
+// @ts-ignore: no bundled types for "cmdk"
 import { Command as CommandPrimitive } from "cmdk";
 import {
   useState,
@@ -8,7 +9,6 @@ import {
   type ReactNode,
 } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./Popover";
-
 import { Skeleton } from "./Skeleton";
 import styles from "./AutoComplete.module.css";
 
@@ -20,12 +20,8 @@ export type Option<T = unknown> = {
 };
 
 const getDisplayText = <T,>(option: Option<T>): string => {
-  if (option.displayText) {
-    return option.displayText;
-  }
-  if (typeof option.label === "string") {
-    return option.label;
-  }
+  if (option.displayText) return option.displayText;
+  if (typeof option.label === "string") return option.label;
   return option.value;
 };
 
@@ -39,7 +35,6 @@ type AutoCompleteProps<T = unknown> = {
   isLoading?: boolean;
   disabled?: boolean;
   placeholder?: string;
-  // when this is false, only values in the options will be accepted
   allowFreeForm?: boolean;
 };
 
@@ -56,25 +51,21 @@ export const AutoComplete = <T = unknown,>({
   allowFreeForm = false,
 }: AutoCompleteProps<T>) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [isOpen, setOpen] = useState(false);
   const [selected, setSelected] = useState<Option<T> | undefined>(value);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       const input = inputRef.current;
-      if (!input) {
-        return;
-      }
+      if (!input) return;
 
-      // This is not a default behaviour of the <input /> field
       if (event.key === "Enter" && input.value !== "") {
-        const optionToSelect = options.find(
-          (option) => getDisplayText(option) === input.value,
+        const opt = options.find(
+          (o) => getDisplayText(o) === input.value
         );
-        if (optionToSelect) {
-          setSelected(optionToSelect);
-          onValueChange?.(optionToSelect);
+        if (opt) {
+          setSelected(opt);
+          onValueChange?.(opt);
         }
       }
 
@@ -83,34 +74,24 @@ export const AutoComplete = <T = unknown,>({
         setOpen(false);
       }
     },
-    [options, onValueChange],
+    [options, onValueChange]
   );
 
   const handleBlur = useCallback(() => {
-    // Only reset the input value if the popover is closed and not in free-form mode
-    // This prevents interference with the selection process
     if (!isOpen && !allowFreeForm) {
       onInputValueChange(selected ? getDisplayText(selected) : "");
     }
   }, [selected, isOpen, onInputValueChange, allowFreeForm]);
 
   const handleSelectOption = useCallback(
-    (selectedOption: Option<T>) => {
-      onInputValueChange(getDisplayText(selectedOption));
-
-      setSelected(selectedOption);
-      onValueChange?.(selectedOption);
-
-      // Close the popover after selection
+    (opt: Option<T>) => {
+      onInputValueChange(getDisplayText(opt));
+      setSelected(opt);
+      onValueChange?.(opt);
       setOpen(false);
-
-      // This is a hack to prevent the input from being focused after the user selects an option
-      // We can call this hack: "The next tick"
-      setTimeout(() => {
-        inputRef?.current?.blur();
-      }, 0);
+      setTimeout(() => inputRef.current?.blur(), 0);
     },
-    [onValueChange, onInputValueChange],
+    [onValueChange, onInputValueChange]
   );
 
   return (
@@ -132,45 +113,41 @@ export const AutoComplete = <T = unknown,>({
             />
           </PopoverTrigger>
         </div>
-        {!!options.length && (
-          <PopoverContent
-            removeBackgroundAndPadding
-            className={styles.popoverContent}
-            align="start"
-            onOpenAutoFocus={(e) => e.preventDefault()}
-          >
+
+        <PopoverContent
+          removeBackgroundAndPadding
+          className={styles.popoverContent}
+          align="start"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
+          {isLoading && (
+            <div className={styles.loadingContainer}>
+              <Skeleton style={{ height: "2rem" }} />
+            </div>
+          )}
+
+          {options.length > 0 ? (
             <CommandList className={styles.commandList}>
-              {options.length > 0 && (
-                <CommandGroup>
-                  {options.map((option) => {
-                    return (
-                      <CommandItem
-                        key={option.value}
-                        value={getDisplayText(option)}
-                        onMouseDown={(event) => {
-                          event.preventDefault();
-                          event.stopPropagation();
-                        }}
-                        onSelect={() => handleSelectOption(option)}
-                      >
-                        {option.label}
-                      </CommandItem>
-                    );
-                    {
-                      isLoading ? (
-                        <CommandPrimitive.Loading>
-                          <div className={styles.loadingContainer}>
-                            <Skeleton style={{ height: "2rem" }} />
-                          </div>
-                        </CommandPrimitive.Loading>
-                      ) : null;
-                    }
-                  })}
-                </CommandGroup>
-              )}
+              <CommandGroup>
+                {options.map((option) => (
+                  <CommandItem
+                    key={option.value}
+                    value={getDisplayText(option)}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onSelect={() => handleSelectOption(option)}
+                  >
+                    {option.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
             </CommandList>
-          </PopoverContent>
-        )}
+          ) : (
+            <div className={styles.emptyMessage}>{emptyMessage}</div>
+          )}
+        </PopoverContent>
       </CommandPrimitive>
     </Popover>
   );

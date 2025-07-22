@@ -101,7 +101,7 @@ const ChartTooltipContent = React.forwardRef<
   (
     {
       active,
-      payload,
+      payload = [],
       className,
       indicator = "dot",
       hideLabel = false,
@@ -123,9 +123,9 @@ const ChartTooltipContent = React.forwardRef<
         return null
       }
 
-      const [item] = payload
-      const key = `${labelKey || item.dataKey || item.name || "value"}`
-      const itemConfig = getPayloadConfigFromPayload(config, item, key)
+      const item = payload?.[0]
+      const key = `${labelKey || item?.dataKey || item?.name || "value"}`
+      const itemConfig = item ? getPayloadConfigFromPayload(config, item, key) : null
       const value =
         !labelKey && typeof label === "string"
           ? config[label as keyof typeof config]?.label || label
@@ -170,7 +170,7 @@ const ChartTooltipContent = React.forwardRef<
           {payload.map((item, index) => {
             const key = `${nameKey || item.name || item.dataKey || "value"}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color || item.payload.fill || item.color
+            const indicatorColor = color || item.payload?.fill || item.color
 
             return (
               <div
@@ -186,13 +186,11 @@ const ChartTooltipContent = React.forwardRef<
                     ) : (
                       !hideIndicator && (
                         <div
-                          className={`${styles.tooltipItemIndicator} ${styles["tooltipItemIndicator-" + (nestLabel && indicator === "dashed" ? "nested-dashed" : indicator)]}`} // dot, line, dashed
-                          style={
-                            {
-                              "--color-bg": indicatorColor,
-                              "--color-border": indicatorColor,
-                            } as React.CSSProperties
-                          }
+                          className={`${styles.tooltipItemIndicator} ${styles["tooltipItemIndicator-" + (nestLabel && indicator === "dashed" ? "nested-dashed" : indicator)]}`}
+                          style={{
+                            "--color-bg": indicatorColor,
+                            "--color-border": indicatorColor,
+                          } as React.CSSProperties}
                         />
                       )
                     )}
@@ -277,7 +275,6 @@ const ChartLegendContent = React.forwardRef<
 )
 ChartLegendContent.displayName = "ChartLegend"
 
-// Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
@@ -289,18 +286,18 @@ function getPayloadConfigFromPayload(
 
   const payloadPayload =
     "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
-      ? payload.payload
+    typeof (payload as any).payload === "object" &&
+    (payload as any).payload !== null
+      ? (payload as any).payload
       : undefined
 
   let configLabelKey: string = key
 
   if (
     key in payload &&
-    typeof payload[key as keyof typeof payload] === "string"
+    typeof (payload as any)[key] === "string"
   ) {
-    configLabelKey = payload[key as keyof typeof payload] as string
+    configLabelKey = (payload as any)[key] as string
   } else if (
     payloadPayload &&
     key in payloadPayload &&

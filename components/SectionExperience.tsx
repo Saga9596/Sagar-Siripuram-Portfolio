@@ -155,9 +155,16 @@ interface SectionExperienceProps {
   onClose: () => void;
   content: RoadmapContent | null;
   onNavigate: (content: RoadmapContent) => void;
+  profileImageUrl?: string;
 }
 
-export const SectionExperience = ({ isOpen, onClose, content, onNavigate }: SectionExperienceProps) => {
+export const SectionExperience = ({
+  isOpen,
+  onClose,
+  content,
+  onNavigate,
+  profileImageUrl,
+}: SectionExperienceProps) => {
   const [history, setHistory] = useState<RoadmapContent[]>([]);
   const currentContent = history.length > 0 ? history[history.length - 1] : content;
 

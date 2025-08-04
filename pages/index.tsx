@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Mail, MapPin, Linkedin, Github, Twitter, ExternalLink } from "lucide-react";
 import { useBackgroundSwap } from "../utils/useBackgroundSwap";
+import Image from "next/image";
 
 const Roadmap = dynamic(
   () => import("../components/Roadmap").then((mod) => mod.Roadmap),
@@ -34,27 +35,36 @@ export default function HomePage() {
           data-bg="/assets/hd/default.jpg"
         >
           <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              Hi, I’m Sagar Siripuram
-              <span className={styles.heroAccent}>Welcome to my portfolio</span>
-            </h1>
-            <p className={styles.heroSubtitle}>
-              Happy to host you—but before we dive in, shall we take a quick tour?
-            </p>
-            <div className={styles.heroStats}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>500+</span>
-                <span className={styles.statLabel}>Tons CO₂ Saved</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>50+</span>
-                <span className={styles.statLabel}>Projects Completed</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>10+</span>
-                <span className={styles.statLabel}>Years Experience</span>
+            <div className={styles.heroText}>
+              <h1 className={styles.heroTitle}>
+                Hi, I’m Sagar Siripuram
+                <span className={styles.heroAccent}>Welcome to my portfolio</span>
+              </h1>
+              <p className={styles.heroSubtitle}>
+                Happy to host you—but before we dive in, shall we take a quick tour?
+              </p>
+              <div className={styles.heroStats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>500+</span>
+                  <span className={styles.statLabel}>Tons CO₂ Saved</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>50+</span>
+                  <span className={styles.statLabel}>Projects Completed</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statNumber}>10+</span>
+                  <span className={styles.statLabel}>Years Experience</span>
+                </div>
               </div>
             </div>
+            <Image
+              src="/images/Sagar.png"
+              alt="Portrait of Sagar Siripuram"
+              width={300}
+              height={300}
+              className={styles.heroImage}
+            />
           </div>
         </section>
 

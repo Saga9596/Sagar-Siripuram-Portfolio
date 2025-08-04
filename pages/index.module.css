@@ -32,9 +32,33 @@
 .heroContent {
   position: relative;      /* above the overlay */
   z-index: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
   color: #fff;
   padding: 2rem;
+  text-align: left;
+}
+
+.heroText {
+  max-width: 600px;
+}
+
+.heroImage {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroText {
+    text-align: center;
+  }
 }
 
 /* ─ Hero Typography & Stats ─────────────────────────────────────────────── */

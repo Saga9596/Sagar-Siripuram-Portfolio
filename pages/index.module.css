@@ -37,6 +37,15 @@
   padding: 2rem;
 }
 
+.heroImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--spacing-6);
+  display: block;
+}
+
 /* ─ Hero Typography & Stats ─────────────────────────────────────────────── */
 .heroTitle {
   font-family: var(--font-family-heading);

@@ -20,10 +20,17 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
+    "pages/**/*",
+    "components/Roadmap.tsx",
+    "components/SectionExperience.tsx",
+    "components/Tooltip.tsx",
+    "helpers/**/*",
+    "utils/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "helpers/ecoSceneManager.tsx",
+    "components/Form.tsx",
+    "**/*.spec.tsx"
   ]
 }

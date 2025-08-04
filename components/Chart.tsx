@@ -79,7 +79,7 @@ const ChartTooltip = RechartsPrimitive.Tooltip
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  RechartsPrimitive.TooltipProps<any, any> &
     React.ComponentProps<"div"> & {
       hideLabel?: boolean
       hideIndicator?: boolean
@@ -90,7 +90,7 @@ const ChartTooltipContent = React.forwardRef<
 >((props, ref) => {
   const {
     active,
-    payload,
+    payload = [],
     className,
     indicator = "dot",
     hideLabel = false,
@@ -184,12 +184,16 @@ const ChartLegend = RechartsPrimitive.Legend
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-      hideIcon?: boolean
-      nameKey?: string
-    }
->(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
+  React.ComponentProps<"div"> & {
+    payload?: RechartsPrimitive.LegendProps<any, any>["payload"]
+    verticalAlign?: RechartsPrimitive.LegendProps<any, any>["verticalAlign"]
+    hideIcon?: boolean
+    nameKey?: string
+  }
+>((
+  { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
+  ref
+) => {
   const { config } = useChart()
   if (!payload?.length) return null
   return (

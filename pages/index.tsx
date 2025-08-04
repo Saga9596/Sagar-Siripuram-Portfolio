@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Mail, MapPin, Linkedin, Github, Twitter, ExternalLink } from "lucide-react";
 import { useBackgroundSwap } from "../utils/useBackgroundSwap";
+import Image from "next/image";
 
 const Roadmap = dynamic(
   () => import("../components/Roadmap").then((mod) => mod.Roadmap),
@@ -28,16 +29,23 @@ export default function HomePage() {
 
       <main className={styles.main}>
         {/* Hero / About */}
-        <section
-          className={styles.hero}
-          id="about"
-          data-bg="/assets/hd/default.jpg"
-        >
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              Hi, I’m Sagar Siripuram
-              <span className={styles.heroAccent}>Welcome to my portfolio</span>
-            </h1>
+      <section
+        className={styles.hero}
+        id="about"
+        data-bg="/assets/hd/default.jpg"
+      >
+        <div className={styles.heroContent}>
+          <Image
+            src="/images/Sagar.png"
+            alt="Sagar Siripuram"
+            width={200}
+            height={200}
+            className={styles.heroImage}
+          />
+          <h1 className={styles.heroTitle}>
+            Hi, I’m Sagar Siripuram
+            <span className={styles.heroAccent}>Welcome to my portfolio</span>
+          </h1>
             <p className={styles.heroSubtitle}>
               Happy to host you—but before we dive in, shall we take a quick tour?
             </p>

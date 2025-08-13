@@ -38,8 +38,6 @@ Build me a responsive, gamified portfolio website with a roadmap-style navigatio
  
 A fully self-hosted portfolio that looks and feels like a living ecosystem—complete with Duolingo-style roadmap navigation, playful sustainability animations, and mobile-smart adaptations.
 
-Built with Floot.
-
 # How to use
 
 1. Import FlootSetup.css to set up the css variables and basic styles.
